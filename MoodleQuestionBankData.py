@@ -10,8 +10,8 @@ class MoodleQuestionBankData(object):
         self.questions = []
 
     #GENERAL FUNCTIONS ---------------------------------------------------------
-    def add_question(self, type, question_name:str, question_text:str, correct_answers:list, wrong_answers:list, question_feedback:str):
-        if type in ["multichoice", "matching"]:
+    def add_multichoice_question(self, type, question_name:str, question_text:str, correct_answers:list, wrong_answers:list, question_feedback:str):
+        if type == "multichoice" :
             question_data = {
                 'type' : type,
                 'question_name' : self.cleanup(question_name),
@@ -24,7 +24,21 @@ class MoodleQuestionBankData(object):
             return 0
         else :
             return -1
-        pass
+
+    def add_matching_question(self, type, question_name:str, question_text:str, subquestions:list, subquestions_answers:list, question_feedback:str):
+        if type == "matching" :
+            question_data = {
+                'type' : type,
+                'question_name' : self.cleanup(question_name),
+                'question_text' : self.cleanup(question_text),
+                'subquestions' : self.cleanup(subquestions),
+                'subquestions_answers' : self.cleanup(subquestions_answers),
+                'question_feedback' : self.cleanup(question_feedback),
+            }
+            self.questions.append(question_data)
+            return 0
+        else :
+            return -1
 
     def cleanup(self,e):
         def _handle(s):
@@ -54,27 +68,26 @@ class MoodleQuestionBankData(object):
                 e[k] = _handle(e[k])
         return e
 
-    def gen_corr_struct(self,correct_answers:list, wrong_answers:list):
-        out = """\\medskip\n\n\\begin{itemize}\n"""
-        for ca in correct_answers:
-            out += """\t\\item \\fbox{\\parbox{15cm}{\\textbf{""" + ca.replace("\n", "") + """}}}\n"""
-        for cw in wrong_answers:
-            out += """\t\\item """ + cw.replace("\n", "") + """\n"""
-        out += """\\end{itemize}\n"""
+    def gen_question_struct(self, question):
+        out = """"""
+        if type == "multichoice":
+            out += """\\medskip\n\n\\begin{itemize}\n"""
+            for ca in question['correct_answers']:
+                out += """\t\\item \\fbox{\\parbox{15cm}{\\textbf{""" + ca.replace("\n", "") + """}}}\n"""
+            for cw in question['wrong_answers']:
+                out += """\t\\item """ + cw.replace("\n", "") + """\n"""
+            out += """\\end{itemize}\n"""
+        elif type == "matching":
+            out += """\\medskip\n\n\\begin{itemize}\n"""
+            for k in range(len(question['subquestions'])):
+                out += """\t\\item """ + question['subquestions'][k].replace("\n", "") + """\n\t\\begin{itemize}\n\t\t\\item[$\bullet$] """ + question['subquestions_answers'][k].replace("\n", "") + """\n\t\\end{itemize}\n"""
+            out += """\\end{itemize}\n"""
         return out
 
-    def export_to_latex(self, filename="moodle_exported.latex", path=""):
-        questions_separator = """%-------------------------------------------------------------------------------"""
-        out_latex = """\\section{""" + self.name + """}\n\\hrule\n\\bigskip\n\n"""
-        for q in self.questions:
-            out_latex += questions_separator + """\n\\subsection{""" + q['question_name'] + """}\n"""
-            out_latex += """""" + q['question_text'] + """\n"""
-            out_latex += self.gen_corr_struct(q['correct_answers'], q['wrong_answers']) + """\n"""
-            out_latex += """\\subsubsection*{Corrigé}\n""" + q['question_feedback'] + """\\medskip\n\n"""
-
+    def export_to_latex_file(self, filename="moodle_exported.latex", path=""):
         #Writing file
         f = open(path+filename,'w')
-        f.write(out_latex)
+        f.write(self.export_to_latex_str())
         f.close()
 
     def export_to_latex_str(self):
@@ -90,9 +103,6 @@ class MoodleQuestionBankData(object):
     #GET SET -------------------------------------------------------------------
     #NAME
     def get_name (self):
-        return self.name
-
-    def getlatex_name (self):
         return self.name
 
     def set_name (self, name:str):
