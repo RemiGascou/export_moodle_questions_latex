@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+        <text>$course$/Défaut pour SPOC systèmes embarqués/Tests_Remi</text>
+
+    </category>
+  </question>
+
+<!-- question: 13364  -->
+  <question type="algebra">
+    <name>
+      <text>Q-Algèbre</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Une question banale d'algèbre.<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <compareby>eval</compareby>
+    <tolerance>0.001</tolerance>
+    <nchecks>10</nchecks>
+    <disallow>  <text></text>
+</disallow>
+    <allowedfuncs></allowedfuncs>
+    <answerprefix>  <text></text>
+</answerprefix>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>x</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="moodle_auto_format">
+      <text>x+1</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+<variable name="x">
+    <min>10</min>
+    <max>20</max>
+</variable>
+  </question>
+
+<!-- question: 13363  -->
+  <question type="matching">
+    <name>
+      <text>Q-Appariement</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[Une question banale. <br>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <shuffleanswers>true</shuffleanswers>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <subquestion format="html">
+      <text><![CDATA[Question 1 :<br><p></p>]]></text>
+      <answer>
+        <text>Réponse 1</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p>Question 2 :<br></p>]]></text>
+      <answer>
+        <text>Réponse 2</text>
+      </answer>
+    </subquestion>
+    <subquestion format="html">
+      <text><![CDATA[<p>Question 3 :<br></p>]]></text>
+      <answer>
+        <text>Réponse 3</text>
+      </answer>
+    </subquestion>
+  </question>
+
+<!-- question: 13365  -->
+  <question type="multichoice">
+    <name>
+      <text>Q-ChoixMultiple</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Une question banale à choix multiples.<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Choix 1<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="html">
+      <text><![CDATA[Le bon choix<br>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Choix 2<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Choix 3<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Choix 4<br></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 13366  -->
+  <question type="truefalse">
+    <name>
+      <text>Q-VraiFaux</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Une question booléenne<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>1.0000000</penalty>
+    <hidden>0</hidden>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>true</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="moodle_auto_format">
+      <text>false</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+</quiz>

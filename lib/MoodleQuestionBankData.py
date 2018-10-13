@@ -25,6 +25,20 @@ class MoodleQuestionBankData(object):
         else :
             return -1
 
+    def add_truefalse_question(self, type, question_name:str, question_text:str, answer:bool, question_feedback:str):
+        if type == "truefalse" :
+            question_data = {
+                'type' : type,
+                'question_name' : self.cleanup(question_name),
+                'question_text' : self.cleanup(question_text),
+                'answer' : answer,
+                'question_feedback' : self.cleanup(question_feedback),
+            }
+            self.questions.append(question_data)
+            return 0
+        else :
+            return -1
+
     def add_matching_question(self, type, question_name:str, question_text:str, subquestions:list, subquestions_answers:list, question_feedback:str):
         if type == "matching" :
             question_data = {
@@ -70,14 +84,21 @@ class MoodleQuestionBankData(object):
 
     def gen_question_struct(self, question):
         out = """"""
-        if type == "multichoice":
+        if question['type'] == "multichoice":
             out += """\\medskip\n\n\\begin{itemize}\n"""
             for ca in question['correct_answers']:
                 out += """\t\\item \\fbox{\\parbox{15cm}{\\textbf{""" + ca.replace("\n", "") + """}}}\n"""
             for cw in question['wrong_answers']:
                 out += """\t\\item """ + cw.replace("\n", "") + """\n"""
             out += """\\end{itemize}\n"""
-        elif type == "matching":
+        elif question['type'] == "truefalse":
+            out += """\\medskip\n\n\\begin{itemize}\n"""
+            for ca in question['correct_answers']:
+                out += """\t\\item \\fbox{\\parbox{15cm}{\\textbf{""" + ca.replace("\n", "") + """}}}\n"""
+            for cw in question['wrong_answers']:
+                out += """\t\\item """ + cw.replace("\n", "") + """\n"""
+            out += """\\end{itemize}\n"""
+        elif question['type'] == "matching":
             out += """\\medskip\n\n\\begin{itemize}\n"""
             for k in range(len(question['subquestions'])):
                 out += """\t\\item """ + question['subquestions'][k].replace("\n", "") + """\n\t\\begin{itemize}\n\t\t\\item[$\bullet$] """ + question['subquestions_answers'][k].replace("\n", "") + """\n\t\\end{itemize}\n"""
