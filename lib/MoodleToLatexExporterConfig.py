@@ -37,7 +37,7 @@ class MoodleToLatexExporterConfig(object):
         self.latex_title = title
 
     def get_latex_mainheader (self):
-        return self.latex_mainheader + """\n\n\n\\title{""" + self.latex_title + """}\n\\author{""" + self.latex_author + """}\n\\date{\\today}"""
+        return (self.latex_mainheader + """\n\n\n\\title{""" + self.latex_title + """}\n\\author{""" + self.latex_author + """}\n\\date{\\today}""").encode("utf-8")
 
     def set_latex_mainheader (self, latex_mainheader):
         self.latex_mainheader = latex_mainheader

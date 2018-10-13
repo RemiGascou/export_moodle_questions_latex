@@ -93,32 +93,34 @@ class MoodleQuestionBankData(object):
             out += """\\end{itemize}\n"""
         elif question['type'] == "truefalse":
             out += """\\medskip\n\n\\begin{itemize}\n"""
-            for ca in question['correct_answers']:
-                out += """\t\\item \\fbox{\\parbox{15cm}{\\textbf{""" + ca.replace("\n", "") + """}}}\n"""
-            for cw in question['wrong_answers']:
-                out += """\t\\item """ + cw.replace("\n", "") + """\n"""
+            if question['answer'] == True:
+                out += """\t\\item \\fbox{\\parbox{15cm}{\\textbf{Vrai}}}\n"""
+                out += """\t\\item Faux\n"""
+            else:
+                out += """\t\\item \\fbox{\\parbox{15cm}{\\textbf{Faux}}}\n"""
+                out += """\t\\item Vrai\n"""
             out += """\\end{itemize}\n"""
         elif question['type'] == "matching":
             out += """\\medskip\n\n\\begin{itemize}\n"""
             for k in range(len(question['subquestions'])):
                 out += """\t\\item """ + question['subquestions'][k].replace("\n", "") + """\n\t\\begin{itemize}\n\t\t\\item[$\bullet$] """ + question['subquestions_answers'][k].replace("\n", "") + """\n\t\\end{itemize}\n"""
             out += """\\end{itemize}\n"""
-        return out
+        return out.encode("utf-8")
 
     def export_to_latex_file(self, filename="moodle_exported.latex", path=""):
         #Writing file
-        f = open(path+filename,'w')
-        f.write(self.export_to_latex_str())
+        f = open(path+filename,'wb')
+        f.write(self.export_to_latex_bstr())
         f.close()
 
-    def export_to_latex_str(self):
+    def export_to_latex_bstr(self):
         questions_separator = """%-------------------------------------------------------------------------------"""
-        out_latex = """\\section{""" + self.name + """}\n\\hrule\n\\bigskip\n\n"""
+        out_latex = ("""\\section{""" + self.name + """}\n\\hrule\n\\bigskip\n\n""").encode("utf-8")
         for q in self.questions:
-            out_latex += questions_separator + """\n\\subsection{""" + q['question_name'] + """}\n"""
-            out_latex += """""" + q['question_text'] + """\n"""
-            out_latex += self.gen_corr_struct(q['correct_answers'], q['wrong_answers']) + """\n"""
-            out_latex += """\\subsubsection*{Corrigé}\n""" + q['question_feedback'] + """\n\\medskip\n\n"""
+            out_latex += (questions_separator + """\n\\subsection{""" + q['question_name'] + """}\n""").encode("utf-8")
+            out_latex += ("""""" + q['question_text'] + """\n""").encode("utf-8")
+            out_latex += self.gen_question_struct(q) + ("""\n""").encode("utf-8")
+            out_latex += ("""\\subsubsection*{Corrigé}\n""" + q['question_feedback'] + """\n\\medskip\n\n""").encode("utf-8")
         return out_latex
 
     #GET SET -------------------------------------------------------------------
